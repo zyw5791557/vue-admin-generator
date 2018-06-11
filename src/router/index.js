@@ -1,32 +1,47 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 
-const Home = resolve => require(['@/views/Home.vue'], resolve);
-const About = resolve => require(['@/views/About.vue'], resolve);
+const Layout = () => import('@/views/Layout/Layout.vue')
 
-Vue.use(Router);
+const Login = () => import('@/views/Login/index.vue')
+const Dashboard = () => import('@/views/Dashboard/index.vue')
 
-let routes =  [
+Vue.use(Router)
+
+let routes = [
     {
-        path: '/',
-        name: 'home',
-        component: Home
+        path: '/login',
+        name: 'Login',
+        component: Login
     },
     {
-        path: '/about',
-        name: 'about',
-        component: About
+        path: '/',
+        component: Layout,
+        redirect: '/dashboard',
+        name: 'Dashboard',
+        children: [
+            {
+                path: 'dashboard',
+                component: Dashboard,
+                meta: { title: 'Dashboard', icon: 'icon-dashbord' }
+            }
+        ]
+    },
+    {
+        path: '/404',
+        component: () => import('@/views/404.vue')
+    },
+    {
+        path: '*',
+        redirect: '/404',
+        component: () => import('@/views/404.vue')
     }
-];
-
+]
 
 const router = new Router({
-	mode: 'history',       // 需要后台配置支持
-	routes
-});
+    mode: 'history', // 需要后台配置支持
+    scrollBehavior: () => ({ y: 0 }),
+    routes
+})
 
-router.beforeEach((to, from, next) => {
-	next();
-});
-
-export default router;
+export default router

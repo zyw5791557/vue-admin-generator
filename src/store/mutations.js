@@ -1,12 +1,5 @@
-import * as types from './mutation-types';
+// import * as types from './mutation-types'
 
-const mutations = {
-	[types.SET_ENV_VALUE] (state, n) {
-		state.currentEnvValue = n;
-	},
-	[types.SET_ICON_EDIT_DIALOG_STATE] (state, boolean) {
-		state.iconEditDialogState = boolean;
-	}
-};
+const mutations = {}
 
-export default mutations;
+export default mutations
