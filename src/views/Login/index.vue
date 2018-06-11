@@ -1,6 +1,13 @@
 <template>
     <div class="login-container">
-        <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
+        <el-form 
+            class="login-form" 
+            autoComplete="on" 
+            :class="{ 'login-form-mobile': device === 'mobile' }"
+            :model="loginForm" 
+            :rules="loginRules" 
+            ref="loginForm" 
+            label-position="left">
             <h3 class="title">{{ systemName }}</h3>
             <el-form-item prop="username">
                 <span class="svg-container svg-container_login">
@@ -32,9 +39,11 @@
 
 <script>
 import { isvalidUsername } from '@/utils/validate';
+import ResizeHandler from '@/views/Layout/mixin/ResizeHandler'
 
 export default {
     name: 'Login',
+    mixins: [ResizeHandler],
     data () {
         const validateUsername = (rule, value, callback) => {
             if (!isvalidUsername(value)) {
@@ -71,6 +80,11 @@ export default {
             loading: false,
             pwdType: 'password'
         };
+    },
+    computed: {
+        device () {
+            return this.$store.state.app.device;
+        }
     },
     methods: {
         showPwd () {
@@ -153,6 +167,9 @@ $light_gray: #eee;
         width: 520px;
         padding: 35px 35px 15px 35px;
         margin: 120px auto;
+    }
+    .login-form-mobile {
+        width: 100vw;
     }
     .tips {
         font-size: 14px;
