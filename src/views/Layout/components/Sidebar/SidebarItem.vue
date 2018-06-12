@@ -12,7 +12,7 @@
 
             <el-submenu v-else :index="item.name||item.path" :key="item.name">
                 <template slot="title">
-                    <i v-if="item.meta&&item.meta.icon" :class="item.meta.icon" class="fa icon"></i>
+                    <i v-if="item.meta&&item.meta.icon" :class="item.meta.icon" class="iconfont icon"></i>
                     <span v-if="item.meta&&item.meta.title" slot="title">{{item.meta.title}}</span>
                 </template>
 
