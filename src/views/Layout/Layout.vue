@@ -61,7 +61,7 @@ export default {
     width: 100%;
     top: 0;
     height: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 999;
 }
 </style>
